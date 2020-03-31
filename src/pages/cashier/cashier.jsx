@@ -5,8 +5,9 @@ import aliPayUrl from '../../images/cashier-alipay-icon.png';
 import CttUrl from '../../images/server-ctt-avatar.jpg';
 import CsbUrl from '../../images/server-csb-avatar.jpg';
 import TipAlert from '../../components/tipAlert/tipAlert.jsx'
+import ThemeContext from '../../context/index.jsx'
 
-export default class ServerCsb extends Component{
+export default class Cashier extends Component{
     constructor(props){
         super(props);
         this.state = {
@@ -27,6 +28,7 @@ export default class ServerCsb extends Component{
     }
 
     componentWillMount(){
+        console.log(this)
         let query = this.props.location.query;
         if(query && query.type == 'ctt'){
             this.setState({
@@ -41,6 +43,11 @@ export default class ServerCsb extends Component{
             })
         }
 
+    }
+
+    componentDidMount(){
+        console.log(this.textInput)
+        this.textInput.focus();
     }
 
     choosePayType(e){
@@ -122,6 +129,11 @@ export default class ServerCsb extends Component{
             }, 2000);
             return
         }
+        var sucflag = true;
+        if(Math.random>0.5){
+            sucflag = false
+        }
+        this.props.history.push({pathname:'/cashier/payresult',query:{'successFlag':sucflag}})
     }
 
     render(){
@@ -165,7 +177,7 @@ export default class ServerCsb extends Component{
                         </div>
                     </div>
                     <div className="cashier-buy-item">
-                        <span className="required">邀请码：</span><input name="inviteCode" value={this.state.formData.inviteCode} className="cbi-input" onChange={this.formInput.bind(this,'inviteCode')} maxLength="11" type="tel" placeholder="请填写分享者的手机号" />
+                        <span className="required">邀请码：</span><input name="inviteCode" ref={(input) => {this.textInput = input;}} value={this.state.formData.inviteCode} className="cbi-input" onChange={this.formInput.bind(this,'inviteCode')} maxLength="11" type="tel" placeholder="请填写分享者的手机号" />
                     </div>
                     <div className="cashier-buy-item">
                         <span className="required">手机号：</span><input name="userTel" className="cbi-input" value={this.state.formData.userTel}  onChange={this.formInput.bind(this,'userTel')} maxLength="11" type="tel" placeholder="请填写常用手机号" />
@@ -180,3 +192,6 @@ export default class ServerCsb extends Component{
         )
     }
 }
+
+
+Cashier.contextType = ThemeContext;

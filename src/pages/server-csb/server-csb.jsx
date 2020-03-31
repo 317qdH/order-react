@@ -2,6 +2,7 @@ import React,{ Component } from 'react';
 import Header from '../../components/header/header.jsx'
 import './server-csb.less'
 import backgroundUrl from '../../images/server-csb-avatar.jpg';
+import ThemeContext from '../../context/index.jsx'
 
 export default class ServerCsb extends Component{
     constructor(props){
@@ -12,6 +13,10 @@ export default class ServerCsb extends Component{
         }
     }
 
+    componentWillMount(){
+        console.log(this)
+    }
+
     chooseYear(){
         this.setState({
             ChooseCttYear:!ChooseCttYear
@@ -19,6 +24,11 @@ export default class ServerCsb extends Component{
     }
 
     confirmOrder(){
+        let value = this.context;
+        console.log(value)
+        value.toggle('改变content的值');
+        value.name="first blod"
+        console.log(value)
         this.props.history.push({pathname:'/cashier',query:{'type':'csb'}})
     }
 
@@ -107,3 +117,4 @@ export default class ServerCsb extends Component{
         )
     }
 }
+ServerCsb.contextType = ThemeContext;
