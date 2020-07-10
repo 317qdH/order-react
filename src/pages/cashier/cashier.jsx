@@ -92,13 +92,6 @@ export default class Cashier extends Component{
                 tipText:'请填写邀请码',
                 inputError:true
             })
-            this.state.timeout = setTimeout(() => {
-                this.setState({
-                    inputError:false
-                })
-                clearTimeout(this.state.timeout)
-                this.state.timeout = null;
-            }, 2000);
             return
         }
         if(!formData.userTel){
@@ -106,13 +99,6 @@ export default class Cashier extends Component{
                 tipText:'手机号码不能为空',
                 inputError:true
             })
-            this.state.timeout = setTimeout(() => {
-                this.setState({
-                    inputError:false
-                })
-                clearTimeout(this.state.timeout)
-                this.state.timeout = null;
-            }, 2000);
             return
         }
         if(!formData.companyName){
@@ -120,13 +106,6 @@ export default class Cashier extends Component{
                 tipText:'公司名称不能为空',
                 inputError:true
             })
-            this.state.timeout = setTimeout(() => {
-                this.setState({
-                    inputError:false
-                })
-                clearTimeout(this.state.timeout)
-                this.state.timeout = null;
-            }, 2000);
             return
         }
         var sucflag = true;
@@ -187,7 +166,7 @@ export default class Cashier extends Component{
                     </div>
                     <div className="cashier-btn" onClick={this.submitForm.bind(this)}>立即支付</div>
                 </div>
-                {this.state.inputError?<TipAlert tipText={this.state.tipText}></TipAlert>:null}
+                <TipAlert second={2000} tipText={this.state.tipText}></TipAlert>
             </div>
         )
     }

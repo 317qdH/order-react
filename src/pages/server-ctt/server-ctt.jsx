@@ -2,6 +2,7 @@ import React,{ Component } from 'react';
 import Header from '../../components/header/header.jsx'
 import './server-ctt.less'
 import backgroundUrl from '../../images/server-ctt-avatar.jpg';
+import { CSSTransition } from 'react-transition-group';
 
 export default class ServerCsb extends Component{
     constructor(props){
@@ -100,26 +101,31 @@ export default class ServerCsb extends Component{
                 </p>
             </div>
             <div className="csc-buy-btn" onClick={this.showCttYearPopup.bind(this)}>立即购买</div>
-            {this.state.showYearPopup?
-            <div className="popup ctt-year-popup">
-                <div className="popup-bg" onClick={this.showCttYearPopup.bind(this)}></div>
-                <div className="ctt-year-select">
-                    <div className="cys-show">
-                        <img className="scc-avatar" src={backgroundUrl} />
-                        <div className="scc-main">
-                            <p className="scc-main-text">采通通-搜好货基础会员服务，帮助<br/>中小型企业更成功</p>
-                            <p className="scc-main-price">￥<span>1980</span>.00</p>
+            <CSSTransition
+              in={this.state.showYearPopup}  
+              timeout={2000}
+              classNames='boss-text'
+              unmountOnExit
+              >
+                <div className="popup ctt-year-popup">
+                    <div className="popup-bg" onClick={this.showCttYearPopup.bind(this)}></div>
+                    <div className="ctt-year-select">
+                        <div className="cys-show">
+                            <img className="scc-avatar" src={backgroundUrl} />
+                            <div className="scc-main">
+                                <p className="scc-main-text">采通通-搜好货基础会员服务，帮助<br/>中小型企业更成功</p>
+                                <p className="scc-main-price">￥<span>1980</span>.00</p>
+                            </div>
                         </div>
+                        <div className="cys-list flexBox flexAlignCenter flexBetween">
+                            <div idx="1" onClick={this.chooseYear.bind(this,1)} className={`cys-item ${this.state.yearChooseTab == 1?'cys-item-select':''}`}>一年</div>
+                            <div idx="2" onClick={this.chooseYear.bind(this,2)} className={`cys-item ${this.state.yearChooseTab == 2?'cys-item-select':''}`}>两年</div>
+                            <div idx="3" onClick={this.chooseYear.bind(this,3)} className={`cys-item ${this.state.yearChooseTab == 3?'cys-item-select':''}`}>三年</div>
+                        </div>
+                        <div className="cys-buy-btn" onClick={this.confirmOrder.bind(this)}>立即购买</div>
                     </div>
-                    <div className="cys-list flexBox flexAlignCenter flexBetween">
-                        <div idx="1" onClick={this.chooseYear.bind(this,1)} className={`cys-item ${this.state.yearChooseTab == 1?'cys-item-select':''}`}>一年</div>
-                        <div idx="2" onClick={this.chooseYear.bind(this,2)} className={`cys-item ${this.state.yearChooseTab == 2?'cys-item-select':''}`}>两年</div>
-                        <div idx="3" onClick={this.chooseYear.bind(this,3)} className={`cys-item ${this.state.yearChooseTab == 3?'cys-item-select':''}`}>三年</div>
-                    </div>
-                    <div className="cys-buy-btn" onClick={this.confirmOrder.bind(this)}>立即购买</div>
                 </div>
-            </div>:null
-            }
+            </CSSTransition>
             </div>
         )
     }

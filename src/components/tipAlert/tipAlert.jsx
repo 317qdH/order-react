@@ -1,9 +1,6 @@
 // @flow strict
-
 import React,{ Component } from 'react';
-
 class TipAlert extends Component{
-
 
     render() {
         return (
@@ -16,4 +13,34 @@ class TipAlert extends Component{
     }
 }
 
-export default TipAlert;
+class TipTwo extends React.Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            inputError:false
+        }
+    }    
+    componentWillReceiveProps(){
+        if(this.state.inputError){
+            return
+        }
+        this.setState({
+            inputError:true
+        })
+        setTimeout(() => {
+            this.setState({
+                inputError:false
+            })
+        }, this.props.second);
+    }
+    render() {
+        return (
+            <div>
+                {this.state.inputError?<TipAlert tipText={this.props.tipText}></TipAlert>:null}
+            </div>
+        );
+    }
+}
+
+export default TipTwo;

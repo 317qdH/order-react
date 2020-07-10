@@ -1,0 +1,47 @@
+.ctt-year-popup{
+    // display: none;
+}
+.show-popup{
+    animation: show-item 0.2s ease-in forwards;
+}
+.hide-popup{
+    animation: hide-item 0.2s ease-in forwards;
+}
+
+@keyframes hide-item{
+    0% {
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+@keyframes show-item{
+    0% {
+        opacity:0;
+    }
+    100%{
+        opacity:1;
+    }
+}
+
+.boss-text-enter{
+    opacity: 0;
+}
+.boss-text-enter-active{
+    opacity: 1;
+    transition: opacity 2000ms;
+}
+.boss-text-enter-done{
+    opacity: 1;
+}
+.boss-text-exit{
+    opacity: 1;
+}
+.boss-text-exit-active{
+    opacity: 0;
+    transition: opacity 2000ms;
+}
+.boss-text-exit-done{
+    opacity: 0;
+}

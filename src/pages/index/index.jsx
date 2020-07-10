@@ -11,6 +11,34 @@ export default class Home extends Component{
         }
     }
 
+    componentDidMount(){
+        function compose (...funcs) {
+            console.log(funcs,'func')
+            // console.log(...funcs,'...func')
+            if (funcs.length === 0) {
+              return arg => arg
+            }
+          
+            if (funcs.length === 1) {
+              return funcs [0]
+            }
+            return funcs.reduce ((a, b) => {
+                return (...args) =>{
+                    return  a (b (...args))
+                }
+            })
+        }
+
+        const f0 = (x) => { console.log (x) }
+        const f1 = () => { console.log (1) }
+        const f2 = () => { console.log (2) }
+        let fArr = [f2, f1, f0];
+        // let fArr = [];
+        let res = compose (...fArr);
+        console.log(res,'res')
+        console.log (compose (...fArr)(100)) // 执行 f2 (f1 (f0 (100))) 输出 100 1 2
+    }
+
     render(){
         return (
             <div className="wrapper">
